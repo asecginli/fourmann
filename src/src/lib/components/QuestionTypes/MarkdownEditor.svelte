@@ -17,10 +17,21 @@
 
   function updatePreview(markdown: string) {
     try {
-      previewHtml = marked.parse(markdown, { 
+      const parsed = marked.parse(markdown, { 
         breaks: true,
         gfm: true
       });
+      
+      if (parsed instanceof Promise) {
+        parsed.then(result => {
+          previewHtml = result;
+        }).catch(error => {
+          console.error('Error parsing markdown:', error);
+          previewHtml = '<p class="text-red-600">Error parsing markdown</p>';
+        });
+      } else {
+        previewHtml = parsed;
+      }
     } catch (error) {
       console.error('Error parsing markdown:', error);
       previewHtml = '<p class="text-red-600">Error parsing markdown</p>';
