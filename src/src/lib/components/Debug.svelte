@@ -28,7 +28,7 @@
   function getCurrentAnswers(): Answer[] {
     if (!props.page) return [];
     const questions = getAllQuestionsFromPage(props.page);
-    return props.answers.filter(answer => 
+    return props.answers.filter((answer: Answer) => 
       questions.some(q => q.id === answer.questionId)
     );
   }

@@ -5,13 +5,14 @@ import Quote from '@editorjs/quote';
 import Code from '@editorjs/code';
 import Image from '@editorjs/image';
 import type { Answer, Question } from '$lib/types';
+import type { ToolConstructable } from '@editorjs/editorjs';
 
 export interface BlockEditorConfig {
   holder: HTMLElement;
   question: Question;
-  answer: Answer | undefined;
+  answer?: Answer;
   onAnswer: (answer: Answer) => void;
-  onPreviewUpdate: (html: string) => void;
+  onPreviewUpdate: (markdown: string) => void;
 }
 
 export class BlockEditorJs {
@@ -32,7 +33,7 @@ export class BlockEditorJs {
       tools: {
         header: Header,
         list: {
-          class: List,
+          class: List as unknown as ToolConstructable,
           inlineToolbar: true,
           config: {
             defaultStyle: 'unordered',
@@ -143,6 +144,8 @@ export class BlockEditorJs {
           this.config.onPreviewUpdate(markdown);
           this.config.onAnswer({
             questionId: this.config.question.id,
+            questionName: this.config.question.name,
+            questionText: this.config.question.text,
             value: [markdown],
             data: {
               editorData: data
@@ -217,14 +220,28 @@ export class BlockEditorJs {
     return markdown.trim();
   }
 
-  async save(): Promise<{ markdown: string }> {
-    const data = await this.editor?.save();
-    if (data) {
-      return {
-        markdown: this.editorDataToMarkdown(data)
-      };
+  private createAnswer(markdown: string): Answer {
+    return {
+      questionId: this.config.question.id,
+      questionName: this.config.question.name,
+      questionText: this.config.question.text,
+      value: [markdown]
+    };
+  }
+
+  async save(): Promise<string | null> {
+    try {
+      const markdown = await this.editor?.save();
+      if (markdown) {
+        const answer = this.createAnswer(markdown);
+        this.config.onAnswer(answer);
+        return markdown;
+      }
+      return null;
+    } catch (error) {
+      console.error('Error saving markdown:', error);
+      return null;
     }
-    return { markdown: '' };
   }
 
   async destroy(): Promise<void> {

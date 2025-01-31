@@ -5,7 +5,7 @@
   import ProgressBar from './lib/components/ProgressBar.svelte';
   import LoadingSpinner from './lib/components/LoadingSpinner.svelte';
   import Debug from './lib/components/Debug.svelte';
-  import type { Page, Answer, QuizConfig } from './lib/types';
+  import type { Page, Answer, QuizConfig, Question, QuestionsContent } from './lib/types';
   import { QuestionnaireService } from './lib/services/questionnaireService';
   import { QuizStateService } from './lib/services/quizStateService';
 

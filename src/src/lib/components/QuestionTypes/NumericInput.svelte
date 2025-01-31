@@ -32,6 +32,8 @@
       error = props.question.required ? 'This field is required' : null;
       props.onAnswer({
         questionId: props.question.id,
+        questionName: props.question.name,
+        questionText: props.question.text,
         value: ['']
       }, error);
       return;
@@ -45,6 +47,8 @@
       error = `Value cannot exceed ${props.question.maxValue}`;
       props.onAnswer({
         questionId: props.question.id,
+        questionName: props.question.name,
+        questionText: props.question.text,
         value: [rawValue]
       }, error);
       return;
@@ -53,6 +57,8 @@
       error = `Value must be at least ${props.question.minValue}`;
       props.onAnswer({
         questionId: props.question.id,
+        questionName: props.question.name,
+        questionText: props.question.text,
         value: [rawValue]
       }, error);
       return;
@@ -62,6 +68,8 @@
     value = rawValue;
     props.onAnswer({
       questionId: props.question.id,
+      questionName: props.question.name,
+      questionText: props.question.text,
       value: [rawValue]
     }, null);
   }

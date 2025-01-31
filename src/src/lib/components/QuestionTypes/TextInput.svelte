@@ -20,6 +20,8 @@
     value = input.value;
     props.onAnswer({
       questionId: props.question.id,
+      questionName: props.question.name,
+      questionText: props.question.text,
       value: [input.value]
     });
   }
@@ -27,6 +29,8 @@
   function handleBlur() {
     props.onAnswer({
       questionId: props.question.id,
+      questionName: props.question.name,
+      questionText: props.question.text,
       value: [value]
     });
   }
