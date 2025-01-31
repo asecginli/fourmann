@@ -41,12 +41,13 @@ Understanding programming language preferences helps us:
     </section>
     <section>
       <questions>
-        <question type="choices" required="true">
+        <question type="choices" required="true" name="fave-prog">
           <text>What is your favorite programming language?</text>
           <choice value="js">JavaScript</choice>
           <choice value="py">Python</choice>
           <choice value="java">Java</choice>
-          <choice value="cpp">C++</choice>
+          <choice value="cpp">C++</choice>  
+          <choice other="true">Other</choice>
         </question>
       </questions>
     </section>
@@ -79,8 +80,8 @@ Your framework preferences help us understand:
         </question>
       </questions>
     </section>
-    <section>
-      <markdown><![CDATA[
+    <section name="yoe">
+      <markdown width="66"><![CDATA[
 ### Experience Level
 
 We also want to know about your years of experience to better understand:
@@ -89,9 +90,7 @@ We also want to know about your years of experience to better understand:
 - Skill development patterns
 - Industry maturity
       ]]></markdown>
-    </section>
-    <section>
-      <questions>
+      <questions width="34">
         <question type="numeric" required="true" minValue="0" maxValue="50">
           <text>How many years of programming experience do you have?</text>
         </question>
@@ -101,7 +100,7 @@ We also want to know about your years of experience to better understand:
   
   <page id="professional" title="Professional Background">
     <section>
-      <markdown width="60"><![CDATA[
+      <markdown width="100"><![CDATA[
 ## Your Professional Journey
 
 Tell us about your current role and experience.
@@ -116,7 +115,7 @@ Your job title helps us understand:
 
 This information helps us tailor content and resources to different professional needs.
       ]]></markdown>
-      <questions width="40">
+      <questions width="100">
         <question type="text" required="true">
           <text>What is your current job title?</text>
         </question>
@@ -126,7 +125,7 @@ This information helps us tailor content and resources to different professional
   
   <page id="projects" title="Project Experience" submit="true">
     <section>
-      <markdown><![CDATA[
+      <markdown width="100"><![CDATA[
 ## Project Showcase
 
 In this final section, we'd like to learn about your most significant programming achievement.
@@ -137,9 +136,7 @@ Please include:
 - Technologies used
 - Lessons learned
       ]]></markdown>
-    </section>
-    <section>
-      <questions>
+      <questions width="100">
         <question type="markdown" required="true">
           <text>Describe your most challenging programming project:</text>
         </question>

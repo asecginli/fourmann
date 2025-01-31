@@ -120,10 +120,12 @@ export class QuestionnaireService {
         id: q.getAttribute('id') || generatedId,
         type: q.getAttribute('type') as Question['type'],
         text: questionText,
+        name: q.getAttribute('name') || questionText,
         required: q.getAttribute('required') === 'true',
         choices: Array.from(q.getElementsByTagName('choice')).map((c) => ({
           value: c.getAttribute('value') || crypto.randomUUID(),
-          text: c.textContent || ''
+          text: c.textContent || '',
+          other: c.getAttribute('other') === 'true'
         })),
         allowMultiple: q.getAttribute('allowMultiple') === 'true',
         minValue: parseFloat(q.getAttribute('minValue') || 'NaN'),

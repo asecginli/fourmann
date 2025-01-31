@@ -1,19 +1,22 @@
 export type QuestionType = 'choices' | 'numeric' | 'decimal' | 'text' | 'markdown';
 
 export interface Choice {
-  value: string;
-  text: string;
+  value?: string;
+  text?: string;
+  other?: boolean;
 }
 
 export interface Question {
   id: string;
   type: QuestionType;
   text: string;
-  required: boolean;
+  required?: boolean;
   choices?: Choice[];
   allowMultiple?: boolean;
-  minValue?: number;
   maxValue?: number;
+  minValue?: number;
+  allowOther?: boolean;
+  name?: string;
 }
 
 export interface Page {
@@ -27,7 +30,8 @@ export interface Page {
 export interface Answer {
   questionId: string;
   value: string[];
-  data?: Record<string, any>;
+  questionName: string;
+  questionText: string;
 }
 
 export interface QuizConfig {

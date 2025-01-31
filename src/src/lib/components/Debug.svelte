@@ -1,18 +1,44 @@
 <script lang="ts">
-  import type { QuizState } from '$lib/types';
+  import type { QuizState, Page, Question, QuestionsContent, Answer } from '$lib/types';
 
   const props = $props<{
     state: QuizState | null;
+    page: Page | null;
+    answers: Answer[];
     onReset: () => void;
   }>();
 
   let isExpanded = $state(false);
   let height = $state('40px');
+  let activeTab = $state<'state' | 'questions' | 'answers'>('state');
 
   function toggleExpand() {
     isExpanded = !isExpanded;
     height = isExpanded ? '500px' : '40px';
   }
+
+  function getAllQuestionsFromPage(page: Page): Question[] {
+    return page.sections.flatMap(section => 
+      section.content
+        .filter((content): content is QuestionsContent => content.type === 'questions')
+        .flatMap(content => content.questions)
+    );
+  }
+
+  function getCurrentAnswers(): Answer[] {
+    if (!props.page) return [];
+    const questions = getAllQuestionsFromPage(props.page);
+    return props.answers.filter(answer => 
+      questions.some(q => q.id === answer.questionId)
+    );
+  }
+
+  $effect(() => {
+    // Reset to first tab when page changes
+    if (props.page) {
+      activeTab = 'state';
+    }
+  });
 </script>
 
 <div 
@@ -39,11 +65,39 @@
       </button>
     </div>
     {#if isExpanded}
+      <div class="px-4 pt-2">
+        <div class="flex gap-2">
+          <button
+            class="px-3 py-1 rounded text-sm {activeTab === 'state' ? 'bg-slate-700' : 'hover:bg-slate-800'}"
+            onclick={() => activeTab = 'state'}
+          >
+            State
+          </button>
+          <button
+            class="px-3 py-1 rounded text-sm {activeTab === 'questions' ? 'bg-slate-700' : 'hover:bg-slate-800'}"
+            onclick={() => activeTab = 'questions'}
+          >
+            Questions
+          </button>
+          <button
+            class="px-3 py-1 rounded text-sm {activeTab === 'answers' ? 'bg-slate-700' : 'hover:bg-slate-800'}"
+            onclick={() => activeTab = 'answers'}
+          >
+            Current Answers
+          </button>
+        </div>
+      </div>
       <div 
-        class="bg-slate-800 rounded p-4 overflow-y-auto mx-4 mb-4"
-        style="height: calc({height} - 56px)"
+        class="bg-slate-800 rounded p-4 overflow-y-auto mx-4 mb-4 mt-2"
+        style="height: calc({height} - 96px)"
       >
-        <pre class="whitespace-pre">{JSON.stringify(props.state, null, 2)}</pre>
+        {#if activeTab === 'state'}
+          <pre class="whitespace-pre">{JSON.stringify(props.state, null, 2)}</pre>
+        {:else if activeTab === 'questions' && props.page}
+          <pre class="whitespace-pre">{JSON.stringify(getAllQuestionsFromPage(props.page), null, 2)}</pre>
+        {:else if activeTab === 'answers'}
+          <pre class="whitespace-pre">{JSON.stringify(getCurrentAnswers(), null, 2)}</pre>
+        {/if}
       </div>
     {/if}
   </div>

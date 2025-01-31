@@ -55,12 +55,13 @@
     <xs:attribute name="allowMultiple" type="xs:boolean" use="optional"/>
     <xs:attribute name="minValue" type="xs:decimal" use="optional"/>
     <xs:attribute name="maxValue" type="xs:decimal" use="optional"/>
+    <xs:attribute name="allowOther" type="xs:boolean" use="optional"/>
   </xs:complexType>
 
   <!-- Question type enumeration -->
   <xs:simpleType name="questionTypeEnum">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="multiple-choice"/>
+      <xs:enumeration value="choices"/>
       <xs:enumeration value="numeric"/>
       <xs:enumeration value="decimal"/>
       <xs:enumeration value="text"/>
@@ -72,7 +73,8 @@
   <xs:complexType name="choiceType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="value" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="optional"/>
+        <xs:attribute name="other" type="xs:boolean" use="optional"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

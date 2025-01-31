@@ -292,7 +292,12 @@
     />
 
     {#if showReset}
-      <Debug state={quizState} onReset={handleReset} />
+      <Debug 
+        state={quizState} 
+        page={currentPage}
+        answers={answers}
+        onReset={handleReset} 
+      />
     {/if}
   {:else}
     <div class="text-center">

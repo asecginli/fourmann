@@ -16,6 +16,13 @@
   function isQuestionsContent(content: MarkdownContent | QuestionsContent): content is QuestionsContent {
     return content.type === 'questions';
   }
+
+  // Calculate if section content should be stacked vertically
+  function shouldStackVertically(section: Section): boolean {
+    const totalWidth = section.content.reduce((sum, content) => 
+      sum + (content.width || 100), 0);
+    return totalWidth > 100;
+  }
 </script>
 
 <div class="max-w-[960px] mx-auto">
@@ -27,12 +34,12 @@
   
   {#each props.page.sections as section}
     <div class="mb-8 bg-white rounded-lg shadow-lg p-6">
-      <div class="flex gap-8 items-start">
+      <div class={shouldStackVertically(section) ? 'flex flex-col gap-6' : 'flex gap-8 items-start'}>
         {#each section.content as content}
           {#if isMarkdownContent(content)}
             <div 
               class="prose prose-sm prose-headings:mt-0 first:prose-headings:mt-0"
-              style="width: {content.width}%"
+              style="width: {shouldStackVertically(section) ? '100' : content.width}%"
             >
               {@html content.content}
             </div>
@@ -41,7 +48,7 @@
           {#if isQuestionsContent(content) && !props.submitted}
             <div 
               class="space-y-4"
-              style="width: {content.width}%"
+              style="width: {shouldStackVertically(section) ? '100' : content.width}%"
             >
               {#each content.questions as question}
                 <div class="bg-transparent">
