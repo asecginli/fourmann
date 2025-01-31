@@ -207,9 +207,18 @@
       }
 
       const timestamp = new Date().toISOString();
+      
+      // Convert answers array to plain JavaScript objects
+      const plainAnswers = answers.map(answer => ({
+        questionId: answer.questionId,
+        value: [...answer.value],
+        questionName: answer.questionName,
+        questionText: answer.questionText
+      }));
+
       const submissionData = {
-        answers,
-        state: props.config.state,
+        answers: plainAnswers,
+        state: props.config.state ? { ...props.config.state } : undefined,
         timestamp
       };
 
