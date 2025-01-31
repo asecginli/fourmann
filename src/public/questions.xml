@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="quiz-schema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<quiz>
+  <page id="welcome" title="Welcome to the Programming Survey">
+    <section>
+      <markdown><![CDATA[
+We're excited to learn more about your programming journey and experience. This survey will help us understand the diverse backgrounds and skills within our community.
+
+## What to Expect
+
+This survey consists of several sections covering:
+- Programming language preferences
+- Framework experience
+- Professional background
+- Project highlights
+
+Your responses will help us better understand the development community and improve our services.
+
+Click 'Next' to begin the survey.
+      ]]></markdown>
+    </section>
+  </page>
+  
+  <page id="languages" title="Programming Languages">
+    <section>
+      <markdown><![CDATA[
+## Programming Language Preferences
+
+Let's start by learning about your preferred programming language.
+
+> Your choice helps us understand which languages are most popular among developers.
+
+### Why This Matters
+
+Understanding programming language preferences helps us:
+- Identify industry trends
+- Plan future content and resources
+- Support the most relevant technologies
+- Build better developer tools
+      ]]></markdown>
+    </section>
+    <section>
+      <questions>
+        <question type="choices" required="true">
+          <text>What is your favorite programming language?</text>
+          <choice value="js">JavaScript</choice>
+          <choice value="py">Python</choice>
+          <choice value="java">Java</choice>
+          <choice value="cpp">C++</choice>
+        </question>
+      </questions>
+    </section>
+  </page>
+  
+  <page id="frameworks" title="Framework Experience">
+    <section>
+      <markdown width="66"><![CDATA[
+## Web Development Experience
+
+Let's explore your experience with web development frameworks and tools.
+
+### Why Framework Choice Matters
+
+Your framework preferences help us understand:
+- Current industry trends
+- Developer workflow preferences
+- Technology adoption patterns
+- Common development stacks
+
+> Understanding framework usage patterns helps us provide better resources and support for the community.
+      ]]></markdown>
+      <questions width="34">
+        <question type="choices" required="true" allowMultiple="true" maxValue="3">
+          <text>Which web frameworks have you used? (Select all that apply)</text>
+          <choice value="react">React</choice>
+          <choice value="vue">Vue</choice>
+          <choice value="svelte">Svelte</choice>
+          <choice value="angular">Angular</choice>
+        </question>
+      </questions>
+    </section>
+    <section>
+      <markdown><![CDATA[
+### Experience Level
+
+We also want to know about your years of experience to better understand:
+- Career progression
+- Technology adoption cycles
+- Skill development patterns
+- Industry maturity
+      ]]></markdown>
+    </section>
+    <section>
+      <questions>
+        <question type="numeric" required="true" minValue="0" maxValue="50">
+          <text>How many years of programming experience do you have?</text>
+        </question>
+      </questions>
+    </section>
+  </page>
+  
+  <page id="professional" title="Professional Background">
+    <section>
+      <markdown width="60"><![CDATA[
+## Your Professional Journey
+
+Tell us about your current role and experience.
+
+### Why We Ask
+
+Your job title helps us understand:
+- The diversity of roles in tech
+- Career progression patterns
+- Industry composition
+- Skills distribution
+
+This information helps us tailor content and resources to different professional needs.
+      ]]></markdown>
+      <questions width="40">
+        <question type="text" required="true">
+          <text>What is your current job title?</text>
+        </question>
+      </questions>
+    </section>
+  </page>
+  
+  <page id="projects" title="Project Experience" submit="true">
+    <section>
+      <markdown><![CDATA[
+## Project Showcase
+
+In this final section, we'd like to learn about your most significant programming achievement.
+
+Please include:
+- Technical challenges faced
+- Solutions implemented
+- Technologies used
+- Lessons learned
+      ]]></markdown>
+    </section>
+    <section>
+      <questions>
+        <question type="markdown" required="true">
+          <text>Describe your most challenging programming project:</text>
+        </question>
+      </questions>
+    </section>
+  </page>
+
+  <page id="thank-you" title="Thank You!">
+    <section>
+      <markdown><![CDATA[
+## Thank You for Your Participation!
+
+We greatly appreciate you taking the time to complete this survey. Your responses will help us better understand our developer community and improve our services.
+
+### What's Next?
+
+- Your responses have been recorded
+- We'll analyze the data to identify trends and patterns
+- The insights will help shape our future content and resources
+- You'll be notified of any follow-up surveys or findings
+
+Thank you again for your valuable contribution!
+      ]]></markdown>
+    </section>
+  </page>
+</quiz>

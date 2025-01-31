@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#f8f9fa] text-[#202124];
+  }
+
+  h1 {
+    @apply text-[#202124] font-bold;
+  }
+}
+
+.prose {
+  @apply text-[#202124];
+}
+
+.prose h1, .prose h2, .prose h3 {
+  @apply text-[#202124] font-medium;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-[#1a73e8] bg-[#f8f9fa] py-2 px-4 my-4;
+}
+
+.prose ul {
+  @apply list-disc list-inside;
+}
+
+/* Google-style focus rings */
+*:focus {
+  @apply outline-none ring-2 ring-[#1a73e8] ring-offset-2;
+}
+
+/* Smooth transitions */
+* {
+  @apply transition-all duration-300;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#f1f3f4];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[#dadce0] rounded-full hover:bg-[#80868b];
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Root element -->
+  <xs:element name="quiz">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="page" type="pageType" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Page type -->
+  <xs:complexType name="pageType">
+    <xs:sequence>
+      <xs:element name="section" type="sectionType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="submit" type="xs:boolean" use="optional"/>
+    <xs:attribute name="submit-remarks" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- Section type -->
+  <xs:complexType name="sectionType">
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="markdown" type="markdownType"/>
+      <xs:element name="questions" type="questionsType"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- Markdown type -->
+  <xs:complexType name="markdownType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="width" type="xs:integer" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- Questions container type -->
+  <xs:complexType name="questionsType">
+    <xs:sequence>
+      <xs:element name="question" type="questionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Question type -->
+  <xs:complexType name="questionType">
+    <xs:sequence>
+      <xs:element name="text" type="xs:string"/>
+      <xs:element name="choice" type="choiceType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="questionTypeEnum" use="required"/>
+    <xs:attribute name="required" type="xs:boolean" use="required"/>
+    <xs:attribute name="allowMultiple" type="xs:boolean" use="optional"/>
+    <xs:attribute name="minValue" type="xs:decimal" use="optional"/>
+    <xs:attribute name="maxValue" type="xs:decimal" use="optional"/>
+  </xs:complexType>
+
+  <!-- Question type enumeration -->
+  <xs:simpleType name="questionTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="multiple-choice"/>
+      <xs:enumeration value="numeric"/>
+      <xs:enumeration value="decimal"/>
+      <xs:enumeration value="text"/>
+      <xs:enumeration value="markdown"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Choice type -->
+  <xs:complexType name="choiceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="value" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

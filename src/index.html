@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </head>
+  <body>
+    <!-- Simple div container -->
+    <div id="quiz"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      (function() {
+        // Wait for Quiz to be defined before initializing
+        function initQuiz() {
+                if (typeof Quiz !== 'undefined') {
+                  Quiz.init('quiz', {
+                    source: '/questions.xml',
+                    debug: true,
+                    state: {
+                      user_id: '123',
+                      session_id: 'abc123'
+                    },
+                    on_submit: (formData) => {
+                      console.log('Form submitted:', formData);
+                      // Example: Send to an API endpoint
+                      // fetch('/api/submit', {
+                      //   method: 'POST',
+                      //   headers: { 'Content-Type': 'application/json' },
+                      //   body: JSON.stringify(formData)
+                      // });
+                    }
+                  });
+                } else {
+                  // Retry after a short delay if Quiz is not yet defined
+                  setTimeout(initQuiz, 50);
+                }
+          }
+          document.addEventListener('DOMContentLoaded', initQuiz);
+      })();
+
+      
+    </script>
+  </body>
+</html>
