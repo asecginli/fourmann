@@ -5,8 +5,7 @@
   import { onMount, onDestroy, createRawSnippet } from 'svelte';
   import type { Question, Answer } from '$lib/types';
   import type { ListenerManager } from '@milkdown/plugin-listener';
-  import { uploadConfig } from '@milkdown/plugin-upload';
-
+  
   const props = $props<{
     question: Question;
     answer: Answer | undefined;
@@ -15,7 +14,6 @@
 
   let crepeEditor: Crepe | null = null;
   let editorContainer: HTMLElement | null = null;
-  
   
   onMount(() => {
     if (editorContainer) {
