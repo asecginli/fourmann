@@ -42,5 +42,6 @@
   oninput={handleInput}
   onblur={handleBlur}
   class="w-full p-4 border border-[#dadce0] rounded-lg focus:ring-2 focus:ring-[#1a73e8] focus:border-[#1a73e8] outline-none transition-all duration-300 text-[#202124]"
+  style="font-family: var(--font-family)"
   placeholder="Type your answer here..."
 />

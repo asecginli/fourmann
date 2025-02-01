@@ -17,24 +17,6 @@
   let editorContainer: HTMLElement | null = null;
   
   
-/*
-  const uploadOptions: uploadConfig = {
-    uploadImages: async (files) => {
-      const results = await Promise.all(
-        files.map((file) => {
-          return new Promise<string>((resolve) => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              resolve(reader.result as string);
-            };
-            reader.readAsDataURL(file);
-          });
-        })
-      );
-      return results;
-    },
-  };
-  */
   onMount(() => {
     if (editorContainer) {
       crepeEditor = new Crepe({
@@ -99,15 +81,14 @@
 
   :global(.milkdown) {
     padding: 40px;
-    
   }
      /* Target the Milkdown editor and set the font for paragraphs */
     :global(.milkdown .editor p) {
-      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-family: var(--font-family);
     }
 
     :global(.milkdown .editor h1, .milkdown .editor h2, .milkdown .editor h3) {
-      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-family: var(--font-family);
     }
 
   :global(.milkdown .ProseMirror) {

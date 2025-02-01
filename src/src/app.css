@@ -3,12 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
   body {
     @apply bg-[#f8f9fa] text-[#202124];
+    font-family: var(--font-family);
   }
 
   h1 {
     @apply text-[#202124] font-bold;
+    font-family: var(--font-family);
   }
 }
 
